@@ -113,7 +113,7 @@ add_filter( 'ssp_episode_query_args', 'ssp_private_add_private_podcast_episodes'
  * @return  void        Sets WP_Query args.
  */
 function ssp_private_include_private_in_search( $query ) {
-	if ( ! is_admin() && is_user_logged_in() ) {
+	if ( ! is_admin() && is_user_logged_in() && 'podcast' === $query->get( 'post_type' ) ) {
 		$query->set(
 			'post_status', array(
 				'publish',
