@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Seriously Simple Private Podcasting
- * Plugin URL: https://gist.github.com/macbookandrew/b3e08a9e35a44526e47ecb35d1113c8f
+ * Plugin URL: https://github.com/wwntbm/Seriously-Simple-Private-Podcasting/
  * Description: Include posts marked “private” in podcast feed. Note: activate this <strong>first</strong>, then the Seriously Simple Podcasting plugin.
  * Version: 1.2.0
  * Author: AndrewRMinion Design
