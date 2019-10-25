@@ -3,7 +3,7 @@
  * Plugin Name: Seriously Simple Private Podcasting
  * Plugin URL: https://gist.github.com/macbookandrew/b3e08a9e35a44526e47ecb35d1113c8f
  * Description: Include posts marked “private” in podcast feed. Note: activate this <strong>first</strong>, then the Seriously Simple Podcasting plugin.
- * Version: 1.1.5
+ * Version: 1.2.0
  * Author: AndrewRMinion Design
  * Author URI: https://andrewrminion.com
  *
@@ -152,3 +152,47 @@ function ssp_private_allow_subscribers_private_access() {
 	$subscriber->add_cap( 'read_private_pages' );
 }
 add_action( 'init', 'ssp_private_allow_subscribers_private_access' );
+
+/**
+ * Add date to post columns.
+ *
+ * @param string[] $post_columns Defined post columns.
+ *
+ * @return string[]              Defined post columns.
+ * @since 1.2.0
+ */
+function ssp_private_posts_columns( $post_columns ) {
+	$post_columns['publish_date'] = __( 'Publish Date', 'ssp-private-podcasts' );
+	return $post_columns;
+}
+add_filter( 'manage_podcast_posts_columns', 'ssp_private_posts_columns', 10 );
+
+/**
+ * Display content for the custom column.
+ *
+ * @param string $column  Column name.
+ * @param int    $post_id Post ID.
+ *
+ * @return void           Prints content.
+ * @since 1.2.0
+ */
+function ssp_private_custom_column( $column, $post_id ) {
+	if ( 'publish_date' === $column ) {
+		echo get_the_date( '', $post_id );
+	}
+}
+add_action( 'manage_podcast_posts_custom_column', 'ssp_private_custom_column', 10, 2 );
+
+/**
+ * Set publish date to be sortable.
+ *
+ * @param string[] $columns Sortable columns.
+ *
+ * @return string[]         Sortable columns.
+ * @since 1.2.0
+ */
+function ssp_private_sortable_columns( $columns ) {
+	$columns['publish_date'] = 'date';
+	return $columns;
+}
+add_filter( 'manage_edit-podcast_sortable_columns', 'ssp_private_sortable_columns' );
