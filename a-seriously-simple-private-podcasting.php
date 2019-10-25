@@ -72,7 +72,8 @@ if ( ! function_exists( 'ssp_episode_ids' ) ) {
 
 		// If nothing in cache then fetch episodes again and store in cache.
 		if ( false === $podcast_episodes ) {
-			$podcast_episodes = get_posts( $args );
+			$query = new WP_Query( $args );
+			$podcast_episodes = $query->get_posts();
 			wp_cache_set( $key, $podcast_episodes, $group, HOUR_IN_SECONDS * 12 );
 		}
 
